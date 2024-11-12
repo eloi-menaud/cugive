@@ -10,6 +10,16 @@ type Commit struct{
 	short_id string
 	message string
 }
+func NewCommit(raw string) Commit{
+	commit 686a88148ee187e68a0a74cd915686c1e2ba5b47
+Author: eloi.menaud <eloi.menaud@thalesgroup.com>
+Date:   Tue Nov 12 22:38:27 2024 +0100
+
+    brkc: test
+
+	id_regexp=`^commit (.+)`
+	
+}
 
 func GetCommits(target string, branch string) ([]Commit,error){
 
@@ -36,7 +46,7 @@ func GetCommits(target string, branch string) ([]Commit,error){
 	// get commit
 	fmt.Printf("executing log %s\n", branch)
 
-	cmd = exec.Command("git", "log", branch, "--", "target")
+	cmd = exec.Command("git", "--no-pager", "log", branch, "--", target)
 
 	stdout.Reset()
 	stderr.Reset()
@@ -58,5 +68,6 @@ func GetCommits(target string, branch string) ([]Commit,error){
 }
 
 func main(){
-	_, err := GetCommits(".","main")
+	_,err := GetCommits(".","main")
+	fmt.Println(err)
 }

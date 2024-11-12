@@ -1,0 +1,2 @@
+# cugive
+> custom git versioning
